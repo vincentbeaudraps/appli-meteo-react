@@ -16,7 +16,6 @@ export default function  Weather ({forecast}) {
         </View>
     )
 }
-
 const styles = StyleSheet.create({
     container: {
         backgroundColor: "#FFFFFF",

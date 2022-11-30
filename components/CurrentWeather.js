@@ -1,7 +1,8 @@
 import { isSameDay } from "date-fns";
 import { useEffect, useState } from "react";
 import {Image, StyleSheet, Text, View} from "react-native";
-
+import { LinearGradient } from 'expo-linear-gradient'
+import { Feather } from '@expo/vector-icons';
 
 
 const getIcon = (icon) => `http://openweathermap.org/img/wn/${icon}@4x.png`
@@ -19,6 +20,11 @@ export default function CurrentWeather({ data }) {
     }, [data])
 
     return (
+        <LinearGradient
+            // Button Linear Gradient
+            colors={['#7b95c9', '#30529b', '#006bff']}
+            style={styles.LinearGradient}
+        >
         <View style={styles.container}>
             <Text style={styles.city}>{data?.city.name}</Text>
             <Text style={styles.today}>Aujourd'hui</Text>
@@ -27,16 +33,29 @@ export default function CurrentWeather({ data }) {
 
             <Text style={styles.temp}>{Math.round(currentWeather?.main.temp)}°C</Text>
             <Text style={styles.description}>{currentWeather?.weather[0].description}</Text>
+            <Text style={styles.humidity}>Humidité: {currentWeather?.main.humidity}%</Text>
+            <Text style={styles.humidity}>Vent: {Math.round(currentWeather?.wind.speed * 3.6 )}km/h</Text>
+            <Text style={styles.humidity}>Pluie: {Math.round(currentWeather?.pop * 100 )}</Text>
 
         </View>
+</LinearGradient>
+
     )
 }
 
-const COLOR = "#54565B"
+const COLOR = "#ffffff"
 
 const styles = StyleSheet.create({
+    LinearGradient:{
+        margin: 60,
+        alignItems:"center",
+        height: "60%",
+        borderRadius: 20,
+        width: "100%",
+        overflow:"hidden",
+    },
     city: {
-        fontSize:30,
+        fontSize:18,
         textAlign:'center',
         fontWeight:'500',
         color: COLOR
@@ -46,6 +65,12 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight:'300',
         color:COLOR
+    },
+    humidity: {
+        fontSize: 20,
+        fontWeight:'300',
+        color:COLOR,
+        paddingTop: 5
     },
     image: {
         width:150,
@@ -64,7 +89,8 @@ const styles = StyleSheet.create({
     container: {
         margin: 60,
         alignItems:"center",
-        height: "55%"
+        height: "55%",
+        width: "100%",
     }
 
 })

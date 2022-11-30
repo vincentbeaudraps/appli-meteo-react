@@ -14,7 +14,10 @@ useEffect(()=>{
            hour: dt.getHours(),
            temp: Math.round(f.main.temp),
            icon: f.weather[0].icon,
-           name: format(dt,"EEEE", {locale: fr})
+           name: format(dt,"EEEE", {locale: fr}),
+           humidity: (f.main.humidity),
+           wind: Math.round(f.wind.speed),
+           chanceOfRaine: (f.pop)
        })
    })
     let newForecastsData = forecastsData.map(forecast => {
